@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title th:utext="Register"></title>
+</head>
+<body>
+
+            <form th:action="@{/register}" method="POST" enctype="utf8" th:object="${user}">
+
+
+                <div class="form-group row">
+                    <label for="email">email</label>
+                    <input name="email" type="email" th:field='*{email}'/>
+                    
+                </div>
+                <div class="form-group row">
+                    <label for="password" >password</label>
+                    <input th:field='*{password}' name="password"  type="password" autocomplete="new-password"/>
+
+                </div>
+
+                <button type="submit" class="btn btn-primary">submit</button>
+            </form>
+
+
+</body>
+
+</html>
