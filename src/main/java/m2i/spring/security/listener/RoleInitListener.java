@@ -26,17 +26,11 @@ public class RoleInitListener implements ApplicationListener<ApplicationContextE
 
 	}
 
-	private void createRoleIfNotExists(String roleName) {
-		Optional<Role> roleOptional = roleRepository.findByName("ADMIN");
-		Optional<Role> roleOptional1 = roleRepository.findByName("USER");
-
+	private void createRoleIfNotExists(String roleName ) {
+		Optional<Role> roleOptional = roleRepository.findByName(roleName);
+	
 		if (roleOptional.isEmpty()) {
-			Role role = new Role("ADMIN", new ArrayList<Privilege>());
-			roleRepository.save(role);
-		}
-
-		if (roleOptional1.isEmpty()) {
-			Role role1 = new Role("USER", new ArrayList<Privilege>());
+			Role role1 = new Role(roleName, new ArrayList<Privilege>());
 			roleRepository.save(role1);
 		}
 	}

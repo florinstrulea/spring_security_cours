@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import m2i.spring.security.dao.RoleRepository;
@@ -14,6 +15,9 @@ import m2i.spring.security.model.User;
 
 @Service
 public class UserService {
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -27,7 +31,9 @@ public class UserService {
 		
 		List<Role> roles = new ArrayList<>();
 		
-		User user = new User(userDto.getEmail(), userDto.getPassword(), true, roles);
+		roles.add(userRole);
+		
+		User user = new User(userDto.getEmail(), passwordEncoder.encode(userDto.getPassword()), true, roles);
 		
 		userRepository.save(user);
 		return null;
